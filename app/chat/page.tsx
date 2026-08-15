@@ -442,40 +442,15 @@ export default function ChatPage() {
                   
                   {/* Assistant Header */}
                   {msg.role === "assistant" && (
-                    <div className="text-[10px] uppercase tracking-widest text-muted mb-2 flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className={`w-1.5 h-1.5 ${isGenerating && i === messages.length - 1 && !error ? 'bg-accent animate-pulse' : 'bg-muted'} rounded-full`}></div>
-                        {selectedModel}
-                      </div>
-                      
-                      <div className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-center gap-3">
-                        <button onClick={() => copyToClipboard(msg.content)} className="hover:text-foreground transition-colors flex items-center gap-1" title="Copy">
-                          <Copy size={12} /> <span className="hidden sm:inline">COPY</span>
-                        </button>
-                        {!isGenerating && (
-                          <button onClick={() => handleRegenerateAssistant(i)} className="hover:text-foreground transition-colors flex items-center gap-1" title="Retry Response">
-                            <RotateCcw size={12} /> <span className="hidden sm:inline">REGENERATE</span>
-                          </button>
-                        )}
-                      </div>
+                    <div className="text-[10px] uppercase tracking-widest text-muted mb-2 flex items-center gap-2">
+                      <div className={`w-1.5 h-1.5 ${isGenerating && i === messages.length - 1 && !error ? 'bg-accent animate-pulse' : 'bg-muted'} rounded-full`}></div>
+                      {selectedModel}
                     </div>
                   )}
 
                   {/* User Header */}
                   {msg.role === "user" && (
-                     <div className="text-[10px] uppercase tracking-widest text-muted mb-2 flex items-center justify-between gap-4">
-                        <div className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-center gap-3">
-                          {!isGenerating && (
-                            <>
-                              <button onClick={() => startEdit(i)} className="hover:text-foreground transition-colors flex items-center gap-1" title="Edit">
-                                <Edit2 size={12} /> <span className="hidden sm:inline">EDIT</span>
-                              </button>
-                              <button onClick={() => handleRetryUser(i)} className="hover:text-foreground transition-colors flex items-center gap-1" title="Retry">
-                                <RotateCcw size={12} /> <span className="hidden sm:inline">RETRY</span>
-                              </button>
-                            </>
-                          )}
-                        </div>
+                     <div className="text-[10px] uppercase tracking-widest text-muted mb-2 text-right">
                         <span>USER</span>
                      </div>
                   )}
@@ -513,6 +488,38 @@ export default function ChatPage() {
                             {msg.content}
                           </ReactMarkdown>
                         </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Message Actions Bottom */}
+                  {editingIndex !== i && (
+                    <div className={`mt-3 pt-2 text-[10px] uppercase tracking-widest text-muted flex items-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity ${msg.role === "user" ? "justify-end gap-3 border-t border-border/30" : "justify-start gap-3"}`}>
+                      {msg.role === "assistant" && (
+                        <>
+                          <button onClick={() => copyToClipboard(msg.content)} className="hover:text-foreground transition-colors flex items-center gap-1" title="Copy">
+                            <Copy size={12} /> <span className="hidden sm:inline">COPY</span>
+                          </button>
+                          {!isGenerating && (
+                            <button onClick={() => handleRegenerateAssistant(i)} className="hover:text-foreground transition-colors flex items-center gap-1" title="Retry Response">
+                              <RotateCcw size={12} /> <span className="hidden sm:inline">REGENERATE</span>
+                            </button>
+                          )}
+                        </>
+                      )}
+                      
+                      {msg.role === "user" && !isGenerating && (
+                        <>
+                          <button onClick={() => copyToClipboard(msg.content)} className="hover:text-foreground transition-colors flex items-center gap-1" title="Copy">
+                            <Copy size={12} /> <span className="hidden sm:inline">COPY</span>
+                          </button>
+                          <button onClick={() => startEdit(i)} className="hover:text-foreground transition-colors flex items-center gap-1" title="Edit">
+                            <Edit2 size={12} /> <span className="hidden sm:inline">EDIT</span>
+                          </button>
+                          <button onClick={() => handleRetryUser(i)} className="hover:text-foreground transition-colors flex items-center gap-1" title="Retry">
+                            <RotateCcw size={12} /> <span className="hidden sm:inline">RETRY</span>
+                          </button>
+                        </>
                       )}
                     </div>
                   )}
