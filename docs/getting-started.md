@@ -13,7 +13,13 @@ To develop Hyperion locally:
    cd hyperion
    ```
 
-2. **Install dependencies:**
+2. **Configure Local Proxy (Optional but Recommended):**
+   For maximum security locally, create a `.env.local` file and add your OpenRouter API key. This enables a local proxy so your key never touches the browser memory.
+   ```bash
+   # Create .env.local and add OPENROUTER_API_KEY=your-key
+   ```
+
+3. **Install dependencies:**
    ```bash
    npm install
    ```

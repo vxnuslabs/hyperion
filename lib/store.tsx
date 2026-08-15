@@ -1,6 +1,7 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { hasLocalApiKey } from "@/app/actions";
 
 export type Message = {
   role: "system" | "user" | "assistant";
@@ -24,6 +25,8 @@ type AppState = {
   messages: Message[];
   setMessages: (messages: Message[] | ((prev: Message[]) => Message[])) => void;
   clearChat: () => void;
+  useLocalProxy: boolean;
+  isInitializing: boolean;
 };
 
 const AppContext = createContext<AppState | undefined>(undefined);
@@ -31,6 +34,15 @@ const AppContext = createContext<AppState | undefined>(undefined);
 export function AppProvider({ children }: { children: ReactNode }) {
   // API key is runtime only!
   const [apiKey, setApiKey] = useState("");
+  const [useLocalProxy, setUseLocalProxy] = useState(false);
+  const [isInitializing, setIsInitializing] = useState(true);
+
+  useEffect(() => {
+    hasLocalApiKey().then(hasKey => {
+      setUseLocalProxy(hasKey);
+      setIsInitializing(false);
+    }).catch(() => setIsInitializing(false));
+  }, []);
   
   // Chat state
   const [messages, setMessages] = useState<Message[]>([]);
@@ -87,6 +99,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         messages,
         setMessages,
         clearChat,
+        useLocalProxy,
+        isInitializing,
       }}
     >
       {children}

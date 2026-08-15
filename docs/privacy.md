@@ -6,7 +6,7 @@ Hyperion is architected under the principle of client-side isolation.
 - OpenRouter API Keys.
 - Active transcription states (chat logs).
 - Local system prompt presets (`localStorage`).
-- *Note: While your browser will always carry inherent risks when holding credentials in memory, we strongly recommend cloning the repository and running Hyperion locally so you have full control over the deployment rather than relying on the publicly hosted version.*
+- *Note: In the hosted version, your browser holds credentials in memory during the session. We strongly recommend cloning the repository and running Hyperion locally. The local version includes an option to use a `.env` file (`OPENROUTER_API_KEY`) which securely proxies requests so the key never touches your browser memory.*
 
 ## What is External
 - API authentication payloads.

@@ -28,7 +28,7 @@ export default function PrivacyPage() {
           </ul>
           <div className="mt-6 bg-surface border border-border p-4 text-xs">
             <strong className="text-foreground block mb-1">Security & Isolation Recommendation</strong>
-            While your browser will always carry inherent risks when holding credentials in memory, we strongly recommend cloning the open-source repository and running Hyperion locally so you have full control over the deployment rather than relying on any publicly hosted version.
+            In the hosted version, your browser holds credentials in memory during the session. We strongly recommend cloning the open-source repository and running Hyperion locally. The local version includes an option to use a `.env` file (`OPENROUTER_API_KEY`) which securely proxies requests so the key never touches your browser memory.
           </div>
         </div>
 

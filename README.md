@@ -118,7 +118,7 @@ Hyperion operates on a strictly BYOK (Bring Your Own Key) architecture.
 - Hyperion does not run a server-side authentication proxy.
 - **Reloading the page instantly destroys the API key.**
 
-> **Security Recommendation**: While Hyperion operates purely on the client-side, the browser will always carry inherent risks when holding credentials in memory. We strongly recommend **cloning the repository and running it locally** so you have full control over the deployment rather than relying on the publicly hosted version.
+> **Security Recommendation**: In the hosted version, Hyperion operates purely on the client-side, meaning the browser holds credentials in memory during the session. We strongly recommend **cloning the repository and running it locally**. The local version includes an option to use a `.env` file (`OPENROUTER_API_KEY`) which securely proxies requests so the key never touches your browser memory.
 
 ---
 

@@ -12,7 +12,7 @@ type Model = {
 };
 
 export default function ChatPage() {
-  const { apiKey, setApiKey, messages, setMessages, clearChat, systemPrompt } = useAppStore();
+  const { apiKey, setApiKey, messages, setMessages, clearChat, systemPrompt, useLocalProxy, isInitializing } = useAppStore();
   const [inputKey, setInputKey] = useState("");
   const [models, setModels] = useState<Model[]>([]);
   const [selectedModel, setSelectedModel] = useState<string>("");
@@ -51,7 +51,8 @@ export default function ChatPage() {
     setIsLoadingModels(true);
     setError(null);
     try {
-      const res = await fetch("https://openrouter.ai/api/v1/models");
+      const endpoint = useLocalProxy ? "/api/models" : "https://openrouter.ai/api/v1/models";
+      const res = await fetch(endpoint);
       if (!res.ok) throw new Error("Failed to fetch models");
       const data = await res.json();
       setModels(data.data || []);
@@ -126,13 +127,20 @@ export default function ChatPage() {
     apiPayload.push(...payloadMessages);
 
     try {
-      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      const endpoint = useLocalProxy ? "/api/chat" : "https://openrouter.ai/api/v1/chat/completions";
+      const headers: Record<string, string> = {
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://hyperion.vxnus.xyz",
+        "X-Title": "Hyperion",
+      };
+      
+      if (!useLocalProxy && apiKey) {
+        headers["Authorization"] = `Bearer ${apiKey}`;
+      }
+
+      const res = await fetch(endpoint, {
         method: "POST",
-        headers: {
-          "Authorization": `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-          "X-Title": "Hyperion",
-        },
+        headers,
         body: JSON.stringify({
           model: selectedModel,
           messages: apiPayload,
@@ -273,7 +281,15 @@ export default function ChatPage() {
     navigator.clipboard.writeText(text).catch(() => {});
   };
 
-  if (!apiKey) {
+  if (isInitializing) {
+    return (
+      <main className="flex-1 flex items-center justify-center p-6">
+        <div className="text-muted uppercase tracking-widest text-xs animate-pulse">Initializing...</div>
+      </main>
+    );
+  }
+
+  if (!apiKey && !useLocalProxy) {
     return (
       <main className="flex-1 flex items-center justify-center p-6">
         <div className="max-w-md w-full border border-border bg-surface p-8 shadow-2xl">
@@ -285,8 +301,8 @@ export default function ChatPage() {
               <AlertTriangle size={14} /> Security Disclosure
             </p>
             <p className="text-xs text-muted leading-relaxed">
-              Hyperion operates as a direct client interface and <strong className="text-foreground">relies only on your browser&apos;s HTTPS connection</strong>. Your browser will hold your credentials in memory (which still carries risk), so we strongly recommend using a <strong className="text-foreground">controlled API key with quota/credit limits</strong>.
-              While the browser will always carry inherent risks when holding credentials in memory, we recommend <strong className="text-foreground">cloning the repository and running Hyperion locally</strong> so you have full control over the deployment rather than relying on a hosted version. By connecting, you acknowledge these risks. Please review our <Link href="/terms" className="underline hover:text-foreground">Terms</Link> and <Link href="/privacy" className="underline hover:text-foreground">Privacy Policy</Link> for details.
+              In the hosted version, Hyperion operates as a direct client interface. Your browser holds your credentials in runtime memory (which vanishes on reload but carries inherent risk during the session). We strongly recommend using a <strong className="text-foreground">controlled API key with strict quota limits</strong>.
+              For maximum security, we recommend <strong className="text-foreground">cloning the repository and running Hyperion locally</strong>. The local version allows you to configure your key in a secure `.env` file, meaning the key never touches your browser memory. By connecting, you acknowledge these risks. Please review our <Link href="/terms" className="underline hover:text-foreground">Terms</Link> and <Link href="/privacy" className="underline hover:text-foreground">Privacy Policy</Link> for details.
             </p>
           </div>
 
