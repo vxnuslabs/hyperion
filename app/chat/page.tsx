@@ -444,7 +444,7 @@ export default function ChatPage() {
                         {selectedModel}
                       </div>
                       
-                      <div className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-3">
+                      <div className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-center gap-3">
                         <button onClick={() => copyToClipboard(msg.content)} className="hover:text-foreground transition-colors flex items-center gap-1" title="Copy">
                           <Copy size={12} /> <span className="hidden sm:inline">COPY</span>
                         </button>
@@ -460,7 +460,7 @@ export default function ChatPage() {
                   {/* User Header */}
                   {msg.role === "user" && (
                      <div className="text-[10px] uppercase tracking-widest text-muted mb-2 flex items-center justify-between gap-4">
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-3">
+                        <div className="opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-center gap-3">
                           {!isGenerating && (
                             <>
                               <button onClick={() => startEdit(i)} className="hover:text-foreground transition-colors flex items-center gap-1" title="Edit">
