@@ -79,7 +79,7 @@ It is NOT a security product, an encrypted messaging locker, an anonymous AI ser
 To clone and run Hyperion locally on your machine:
 
 ```bash
-git clone https://github.com/vxnus/hyperion.git
+git clone https://github.com/vxnuslabs/hyperion.git
 cd hyperion
 npm install
 npm run dev

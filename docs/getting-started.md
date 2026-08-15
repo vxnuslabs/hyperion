@@ -9,7 +9,7 @@ To develop Hyperion locally:
 ## Setup
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/vxnus/hyperion.git
+   git clone https://github.com/vxnuslabs/hyperion.git
    cd hyperion
    ```
 
