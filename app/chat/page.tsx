@@ -85,8 +85,9 @@ export default function ChatPage() {
 
   const handleSetKey = (e: React.FormEvent) => {
     e.preventDefault();
-    if (inputKey.trim()) {
-      setApiKey(inputKey.trim());
+    const cleanKey = inputKey.trim().replace(/[^\x20-\x7E]/g, '');
+    if (cleanKey) {
+      setApiKey(cleanKey);
     }
   };
 
@@ -135,7 +136,8 @@ export default function ChatPage() {
       };
       
       if (!useLocalProxy && apiKey) {
-        headers["Authorization"] = `Bearer ${apiKey}`;
+        const safeKey = apiKey.replace(/[^\x20-\x7E]/g, '');
+        headers["Authorization"] = `Bearer ${safeKey}`;
       }
 
       const res = await fetch(endpoint, {
