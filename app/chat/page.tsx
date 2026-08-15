@@ -341,12 +341,12 @@ export default function ChatPage() {
   return (
     <div className="flex-1 flex flex-col h-screen overflow-hidden">
       {/* Top Bar */}
-      <header className="h-14 border-b border-border flex items-center justify-between px-4 shrink-0 bg-background/90 backdrop-blur-sm z-10">
-        <div className="flex items-center gap-4">
-          <Link href="/" className="font-bold tracking-tight text-accent uppercase">Hyperion</Link>
-          <div className="h-4 w-px bg-border hidden sm:block"></div>
+      <header className="h-14 border-b border-border flex items-center justify-between px-2 sm:px-4 shrink-0 bg-background/90 backdrop-blur-sm z-10 gap-2">
+        <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+          <Link href="/" className="font-bold tracking-tight text-accent uppercase text-sm sm:text-base shrink-0 truncate max-w-[80px] sm:max-w-none">Hyperion</Link>
+          <div className="h-4 w-px bg-border hidden sm:block shrink-0"></div>
           
-          <div className="relative group flex items-center gap-2" ref={dropdownRef}>
+          <div className="relative group flex items-center min-w-0 shrink" ref={dropdownRef}>
             <input 
               type="text"
               value={searchModel}
@@ -356,11 +356,11 @@ export default function ChatPage() {
               }}
               onFocus={() => setIsDropdownOpen(true)}
               placeholder="Select Model..."
-              className="bg-transparent border border-border px-2 py-1 text-sm font-mono focus:outline-none focus:border-accent w-[160px] sm:w-[280px] text-foreground/80 hover:text-foreground truncate"
+              className="bg-transparent border border-border px-2 py-1 text-xs sm:text-sm font-mono focus:outline-none focus:border-accent w-[100px] sm:w-[280px] text-foreground/80 hover:text-foreground truncate"
               disabled={isGenerating}
             />
             {isDropdownOpen && (
-              <div className="absolute top-full left-0 mt-1 w-[240px] sm:w-[320px] max-h-60 overflow-y-auto bg-background border border-border shadow-2xl z-50 rounded-sm">
+              <div className="absolute top-full left-0 mt-1 w-[200px] sm:w-[320px] max-h-60 overflow-y-auto bg-background border border-border shadow-2xl z-50 rounded-sm">
                 {models
                   .filter(m => (m.name || m.id).toLowerCase().includes(searchModel.toLowerCase()) || m.id.toLowerCase().includes(searchModel.toLowerCase()))
                   .map(m => (
@@ -384,32 +384,32 @@ export default function ChatPage() {
               </div>
             )}
           </div>
-          {isLoadingModels && <span className="text-xs text-muted animate-pulse hidden sm:inline">Loading models...</span>}
+          {isLoadingModels && <span className="text-xs text-muted animate-pulse hidden md:inline shrink-0">Loading...</span>}
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1 sm:gap-3 shrink-0">
           <button 
             onClick={handleNewChatClick}
             disabled={isGenerating}
-            className="flex items-center gap-2 text-xs font-mono uppercase text-muted hover:text-foreground transition-colors px-2 py-1 disabled:opacity-50"
+            className="flex items-center justify-center text-xs font-mono uppercase text-muted hover:text-foreground transition-colors p-1.5 sm:px-2 sm:py-1 disabled:opacity-50"
             title="New Session"
           >
-            <Plus size={14} /> <span className="hidden sm:inline">New Chat</span>
+            <Plus size={16} className="sm:w-[14px] sm:h-[14px]" /> <span className="hidden sm:inline ml-2">New Chat</span>
           </button>
           <button 
             onClick={exportChat}
             disabled={messages.length === 0}
-            className="flex items-center gap-2 text-xs font-mono uppercase text-muted hover:text-foreground transition-colors px-2 py-1 disabled:opacity-50"
+            className="flex items-center justify-center text-xs font-mono uppercase text-muted hover:text-foreground transition-colors p-1.5 sm:px-2 sm:py-1 disabled:opacity-50"
             title="Export JSON"
           >
-            <Download size={14} /> <span className="hidden sm:inline">Export</span>
+            <Download size={16} className="sm:w-[14px] sm:h-[14px]" /> <span className="hidden sm:inline ml-2">Export</span>
           </button>
           <Link 
             href="/chat/settings"
-            className={`flex items-center gap-2 text-xs font-mono uppercase text-muted hover:text-foreground transition-colors px-2 py-1 ${isGenerating ? 'pointer-events-none opacity-50' : ''}`}
+            className={`flex items-center justify-center text-xs font-mono uppercase text-muted hover:text-foreground transition-colors p-1.5 sm:px-2 sm:py-1 ${isGenerating ? 'pointer-events-none opacity-50' : ''}`}
             title="Settings & System Prompt"
           >
-            <Settings size={14} />
+            <Settings size={16} className="sm:w-[14px] sm:h-[14px]" />
           </Link>
         </div>
       </header>
