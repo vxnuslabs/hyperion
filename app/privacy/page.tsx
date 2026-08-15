@@ -26,6 +26,10 @@ export default function PrivacyPage() {
             <li><strong className="text-foreground">System Prompt Presets:</strong> If you choose to save system prompt presets, those presets are stored strictly locally in your browser&apos;s `localStorage`.</li>
             <li><strong className="text-foreground">Exports:</strong> Conversation exports are generated locally by your browser. No server is involved in creating the JSON file.</li>
           </ul>
+          <div className="mt-6 bg-surface border border-border p-4 text-xs">
+            <strong className="text-foreground block mb-1">Security & Isolation Recommendation</strong>
+            For maximum isolation and privacy, we strongly recommend cloning the open-source repository and running Hyperion locally instead of using any publicly hosted version. This ensures your browser does not hold API credentials in memory for an external domain.
+          </div>
         </div>
 
         <div>

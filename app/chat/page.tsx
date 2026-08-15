@@ -286,7 +286,7 @@ export default function ChatPage() {
             </p>
             <p className="text-xs text-muted leading-relaxed">
               Hyperion operates as a direct client interface and <strong className="text-foreground">relies only on your browser&apos;s HTTPS connection</strong>. Your browser will hold your credentials in memory (which still carries risk), so we strongly recommend using a <strong className="text-foreground">controlled API key with quota/credit limits</strong>.
-              By connecting, you acknowledge these risks. Please review our <Link href="/terms" className="underline hover:text-foreground">Terms</Link> and <Link href="/privacy" className="underline hover:text-foreground">Privacy Policy</Link> for details.
+              For maximum isolation and security, we recommend <strong className="text-foreground">cloning the repository and running Hyperion locally</strong> rather than using the hosted version. By connecting, you acknowledge these risks. Please review our <Link href="/terms" className="underline hover:text-foreground">Terms</Link> and <Link href="/privacy" className="underline hover:text-foreground">Privacy Policy</Link> for details.
             </p>
           </div>
 
