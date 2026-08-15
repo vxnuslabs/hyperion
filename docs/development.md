@@ -3,7 +3,7 @@
 Hyperion enforces strict modular boundaries.
 
 ## Architecture
-- **State:** Handled synchronously in `lib/store.tsx` using Zustand.
+- **State:** Handled synchronously in `lib/store.tsx` using native React Context.
 - **Views:** Driven by Next.js App Router (`app/`).
 - **Styling:** Bespoke monochromatic palette enforced natively in `globals.css` with minimal utility usage via Tailwind CSS v4. No `shadcn/ui` frameworks.
 

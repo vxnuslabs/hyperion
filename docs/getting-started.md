@@ -31,6 +31,6 @@ To develop Hyperion locally:
 
 ## Project Structure
 - `app/` - Next.js App Router views.
-- `lib/store.tsx` - Zustand state store.
+- `lib/store.tsx` - React Context state store.
 - `app/globals.css` - Custom Tailwind theme variables.
 - `docs/` - Project documentation.
