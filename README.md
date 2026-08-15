@@ -5,7 +5,7 @@ A local-first AI chat interface for OpenRouter.
 Hyperion is a client-side interface for interacting with models available through OpenRouter. Bring your own OpenRouter API key, select a model, and start a conversation without creating a Hyperion account or relying on a Hyperion-hosted chat database.
 
 **Hyperion by VXNUS Creative Technology Studio**  
-[vxnus.xyz](https://vxnus.xyz)
+[vxnus.xyz](https://vxnus.xyz) | **[Hosted Version](https://hyperion.vxnus.xyz)**
 
 ---
 
