@@ -58,10 +58,6 @@ export default function ChatPage() {
       if (!res.ok) throw new Error("Failed to fetch models");
       const data = await res.json();
       setModels(data.data || []);
-      if (data.data?.length > 0) {
-        setSelectedModel(data.data[0].id);
-        setSearchModel(data.data[0].id);
-      }
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Failed to load models");
     } finally {
@@ -425,7 +421,13 @@ export default function ChatPage() {
             <div className="inline-block border border-border p-4 bg-surface/50 mb-4">
               SESSION ACTIVE
             </div>
-            <p>System is ready. All messages are transmitted directly to OpenRouter. No history is stored by Hyperion.</p>
+            {!selectedModel ? (
+              <p className="text-red-400 mt-4 border border-red-900/50 p-2 text-xs uppercase animate-pulse">
+                Please select a model to begin
+              </p>
+            ) : (
+              <p>System is ready. All messages are transmitted directly to OpenRouter. No history is stored by Hyperion.</p>
+            )}
             {systemPrompt && (
                <p className="mt-4 text-accent border border-accent/20 bg-accent/5 p-2 text-xs uppercase">
                  System Prompt Active
