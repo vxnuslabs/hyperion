@@ -131,7 +131,6 @@ export default function ChatPage() {
         headers: {
           "Authorization": `Bearer ${apiKey}`,
           "Content-Type": "application/json",
-          "HTTP-Referer": "https://vxnus.xyz",
           "X-Title": "Hyperion",
         },
         body: JSON.stringify({
