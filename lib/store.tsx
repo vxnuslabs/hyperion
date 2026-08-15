@@ -19,6 +19,8 @@ type AppState = {
   setApiKey: (key: string) => void;
   systemPrompt: string;
   setSystemPrompt: (prompt: string) => void;
+  selectedModel: string;
+  setSelectedModel: (model: string) => void;
   presets: Preset[];
   savePreset: (name: string, prompt: string) => void;
   deletePreset: (id: string) => void;
@@ -47,6 +49,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // Chat state
   const [messages, setMessages] = useState<Message[]>([]);
   const [systemPrompt, setSystemPrompt] = useState("");
+  const [selectedModel, setSelectedModel] = useState("");
 
   // Presets (can be persisted locally)
   const [presets, setPresets] = useState<Preset[]>(() => {
@@ -93,6 +96,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setApiKey,
         systemPrompt,
         setSystemPrompt,
+        selectedModel,
+        setSelectedModel,
         presets,
         savePreset,
         deletePreset,

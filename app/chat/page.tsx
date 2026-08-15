@@ -14,10 +14,9 @@ type Model = {
 };
 
 export default function ChatPage() {
-  const { apiKey, setApiKey, messages, setMessages, clearChat, systemPrompt, useLocalProxy, isInitializing } = useAppStore();
+  const { apiKey, setApiKey, messages, setMessages, clearChat, systemPrompt, selectedModel, setSelectedModel, useLocalProxy, isInitializing } = useAppStore();
   const [inputKey, setInputKey] = useState("");
   const [models, setModels] = useState<Model[]>([]);
-  const [selectedModel, setSelectedModel] = useState<string>("");
   const [inputMessage, setInputMessage] = useState("");
   const [isLoadingModels, setIsLoadingModels] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -481,7 +480,7 @@ export default function ChatPage() {
                       {msg.content === "" && isGenerating && i === messages.length - 1 ? (
                         <span className="animate-pulse">_</span>
                       ) : (
-                        <div className="prose prose-invert prose-p:leading-relaxed prose-pre:p-0 max-w-none text-foreground/90">
+                        <div className="prose prose-invert prose-p:leading-relaxed prose-pre:p-0 max-w-none text-foreground/90 [&>*:last-child]:mb-0">
                           <ReactMarkdown remarkPlugins={[remarkGfm]}>
                             {msg.content}
                           </ReactMarkdown>
