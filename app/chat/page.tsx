@@ -277,7 +277,7 @@ export default function ChatPage() {
     return (
       <main className="flex-1 flex items-center justify-center p-6">
         <div className="max-w-md w-full border border-border bg-surface p-8 shadow-2xl">
-          <h2 className="text-xl font-bold tracking-tight mb-4 uppercase">Authentication Required</h2>
+          <h2 className="text-xl font-bold tracking-tight mb-4 uppercase">OpenRouter API Key Required</h2>
           <p className="text-sm text-muted mb-8 leading-relaxed">
             Provide your OpenRouter API key to initialize the console. The key is stored in memory only and will be discarded when you close the tab.
           </p>
@@ -297,9 +297,14 @@ export default function ChatPage() {
               Connect
             </button>
           </form>
-          <p className="mt-6 text-xs text-muted text-center">
-            Don&apos;t have a key? <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Get one from OpenRouter</a>.
-          </p>
+          <div className="mt-6 flex flex-col gap-2 text-xs text-muted text-center">
+            <p>
+              Don&apos;t have a key? <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">Get one from OpenRouter</a>.
+            </p>
+            <p className="opacity-70">
+              By connecting, you agree to our <Link href="/terms" className="underline hover:text-foreground">Terms</Link> and <Link href="/privacy" className="underline hover:text-foreground">Privacy Policy</Link>.
+            </p>
+          </div>
         </div>
       </main>
     );
