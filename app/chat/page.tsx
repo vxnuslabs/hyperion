@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { useAppStore, Message } from "@/lib/store";
-import { ArrowRight, Settings, Plus, Download, StopCircle, Edit2, RotateCcw, Copy } from "lucide-react";
+import { ArrowRight, Settings, Plus, Download, StopCircle, Edit2, RotateCcw, Copy, AlertTriangle } from "lucide-react";
 import Link from "next/link";
 
 type Model = {
@@ -278,7 +278,19 @@ export default function ChatPage() {
       <main className="flex-1 flex items-center justify-center p-6">
         <div className="max-w-md w-full border border-border bg-surface p-8 shadow-2xl">
           <h2 className="text-xl font-bold tracking-tight mb-4 uppercase">OpenRouter API Key Required</h2>
-          <p className="text-sm text-muted mb-8 leading-relaxed">
+          
+          <div className="bg-foreground/5 border border-border p-4 mb-6 relative overflow-hidden group">
+            <div className="absolute top-0 left-0 w-1 h-full bg-accent/50 group-hover:bg-accent transition-colors"></div>
+            <p className="text-xs text-accent font-bold uppercase tracking-wider mb-2 flex items-center gap-2">
+              <AlertTriangle size={14} /> Security Disclosure
+            </p>
+            <p className="text-xs text-muted leading-relaxed">
+              Hyperion operates as a direct client interface and <strong className="text-foreground">does not use any encryption, security layers, or intermediary servers</strong>. 
+              By connecting, you acknowledge these risks. Please review our <Link href="/terms" className="underline hover:text-foreground">Terms</Link> and <Link href="/privacy" className="underline hover:text-foreground">Privacy Policy</Link> for details.
+            </p>
+          </div>
+
+          <p className="text-sm text-muted mb-6 leading-relaxed">
             Provide your OpenRouter API key to initialize the console. The key is stored in memory only and will be discarded when you close the tab.
           </p>
           <form onSubmit={handleSetKey} className="flex flex-col gap-4">
