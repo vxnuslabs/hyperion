@@ -62,7 +62,7 @@ export default function TermsPage() {
           </p>
           <div className="mt-6 bg-surface border border-border p-4 text-xs">
             <strong className="text-foreground block mb-1">Security & Isolation Recommendation</strong>
-            For maximum isolation and security, we strongly recommend cloning the open-source repository and running Hyperion locally instead of using any publicly hosted version. This ensures your browser does not hold API credentials in memory for an external domain.
+            While your browser will always carry inherent risks when holding credentials in memory, we strongly recommend cloning the open-source repository and running Hyperion locally so you have full control over the deployment rather than relying on any publicly hosted version.
           </div>
         </div>
       </section>
