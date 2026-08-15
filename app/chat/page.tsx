@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useAppStore, Message } from "@/lib/store";
 import { ArrowRight, Settings, Plus, Download, StopCircle, Edit2, RotateCcw, Copy, AlertTriangle } from "lucide-react";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 type Model = {
   id: string;
@@ -500,11 +502,15 @@ export default function ChatPage() {
                       </div>
                     </div>
                   ) : (
-                    <div className="whitespace-pre-wrap leading-relaxed overflow-x-auto">
+                    <div className="leading-relaxed overflow-x-auto w-full">
                       {msg.content === "" && isGenerating && i === messages.length - 1 ? (
                         <span className="animate-pulse">_</span>
                       ) : (
-                        msg.content
+                        <div className="prose prose-invert prose-p:leading-relaxed prose-pre:p-0 max-w-none text-foreground/90">
+                          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                            {msg.content}
+                          </ReactMarkdown>
+                        </div>
                       )}
                     </div>
                   )}
